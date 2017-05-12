@@ -1,0 +1,10 @@
+﻿{
+  "dependencies": {
+  },
+  "frameworks": {
+    "MonoAndroid,Version=v7.1": {}
+  },
+  "runtimes": {
+    "win": {}
+  }
+}
