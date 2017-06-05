@@ -9,9 +9,16 @@
   <ContentPage.Padding>
     12,0,12,0
   </ContentPage.Padding>
-  <Button Text="{Binding ButtonText}"
-          Command="{Binding PerformAction}"
+  <StackLayout>
+    <Button Text="{Binding WakeUpButtonText}"
+          Command="{Binding WakeUpAction}"
           VerticalOptions="CenterAndExpand"
           HorizontalOptions="FillAndExpand" />
+    <Button Text="Query some shit!"
+          Command="{Binding QueryApiAction}"
+          VerticalOptions="CenterAndExpand"
+          HorizontalOptions="FillAndExpand" />
+  </StackLayout>
+
 
 </ContentPage>

@@ -58,5 +58,11 @@
   <ItemGroup>
     <None Include="project.json" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\QnApi\QnApi.csproj">
+      <Project>{e4db456b-0c9a-47d9-93d0-245ec226fc58}</Project>
+      <Name>QnApi</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>
