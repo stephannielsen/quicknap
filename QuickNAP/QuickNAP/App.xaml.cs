@@ -9,6 +9,8 @@ namespace QuickNAP
 {
   public partial class App : Application
   {
+    public static string AppName { get; set; } = "QuickNAS!!";
+
     public App()
     {
       InitializeComponent();
