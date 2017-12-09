@@ -21,6 +21,7 @@ namespace QnApi
 
   public class QnApi : IQnApi
   {
+    private HttpClientHandler _httpClientHandler;
     private HttpClient _httpClient;
     private string _ipAddress;
     private string _macAddress;
@@ -40,7 +41,9 @@ namespace QnApi
       _password = password ?? string.Empty;
       _sessionId = string.Empty;
       _token = string.Empty;
-      _httpClient = new HttpClient
+      _httpClientHandler = new HttpClientHandler();
+      _httpClientHandler.ServerCertificateCustomValidationCallback = (msg, certificate2, chain, policy) => true;
+      _httpClient = new HttpClient(_httpClientHandler)
       {
         BaseAddress = new Uri(BasePath)
       };
@@ -54,7 +57,8 @@ namespace QnApi
         new KeyValuePair<string, string>("user", _username),
         new KeyValuePair<string, string>("pass", Convert.ToBase64String(Encoding.UTF8.GetBytes(_password)))
       });
-      var response = await _httpClient.PostAsync(GetUrlForPath(MethodGroup.Misc, Method.Login), payload);
+      var url = GetUrlForPath(MethodGroup.Misc, Method.Login);
+      var response = await _httpClient.PostAsync(url, payload);
       response.EnsureSuccessStatusCode();
       var json = await response.Content.ReadAsStringAsync();
       LoginResponse loginResponse = JsonConvert.DeserializeObject<LoginResponse>(json);
@@ -98,6 +102,9 @@ namespace QnApi
     {
       if (_httpClient != null) _httpClient.Dispose();
       _httpClient = null;
+      if (_httpClientHandler != null) _httpClientHandler.Dispose();
+      _httpClientHandler = null;
+
       _username = string.Empty;
       _password = string.Empty;
       _ipAddress = string.Empty;
