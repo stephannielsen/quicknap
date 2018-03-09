@@ -15,7 +15,7 @@ namespace QuickNAP
     {
       InitializeComponent();
 
-      MainPage = new QuickNAP.MainPage();
+      MainPage = new QuickNAP.MainTabbedPage();
     }
 
     protected override void OnStart()

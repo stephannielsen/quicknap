@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:QuickNAP"
+             x:Class="QuickNAP.ControlPage">
+  <ContentPage.BindingContext>
+    <l:ControlViewModel />
+  </ContentPage.BindingContext>
+  <ContentPage.Title>Control</ContentPage.Title>
+  <ContentPage.Content>
+    <StackLayout VerticalOptions="StartAndExpand">
+      <Button Text="Connect"
+          Command="{Binding ConnectCommand}"
+          IsEnabled="{Binding ConfigSaved}"
+          VerticalOptions="CenterAndExpand"
+          HorizontalOptions="FillAndExpand" />
+      <Button Text="{Binding WakeUpButtonText}"
+          Command="{Binding WakeUpCommand}"
+          IsEnabled="{Binding IsNotConnected}"
+          VerticalOptions="CenterAndExpand"
+          HorizontalOptions="FillAndExpand" />
+      <Button Text="{Binding SleepButtonText}"
+          Command="{Binding SleepCommand}"
+          IsEnabled="{Binding IsConnected}"
+          VerticalOptions="CenterAndExpand"
+          HorizontalOptions="FillAndExpand" />
+      <Button Text="Query some shit!"
+          Command="{Binding QueryCommand}"
+          IsEnabled="{Binding IsConnected}"
+          VerticalOptions="CenterAndExpand"
+          HorizontalOptions="FillAndExpand" />
+    </StackLayout>
+  </ContentPage.Content>
+</ContentPage>

@@ -2,6 +2,8 @@
 using Xamarin.Auth;
 using Xamarin.Forms;
 using QuickNAP.Droid;
+using Android.Content;
+using Plugin.CurrentActivity;
 
 [assembly: Dependency(typeof(CredentialsService))]
 namespace QuickNAP.Droid
@@ -12,7 +14,7 @@ namespace QuickNAP.Droid
     {
       get
       {
-        var account = AccountStore.Create(Forms.Context).FindAccountsForService(App.AppName).FirstOrDefault();
+        var account = AccountStore.Create(CrossCurrentActivity.Current.Activity).FindAccountsForService(App.AppName).FirstOrDefault();
         return account?.Username;
       }
     }
@@ -21,7 +23,7 @@ namespace QuickNAP.Droid
     {
       get
       {
-        var account = AccountStore.Create(Forms.Context).FindAccountsForService(App.AppName).FirstOrDefault();
+        var account = AccountStore.Create(CrossCurrentActivity.Current.Activity).FindAccountsForService(App.AppName).FirstOrDefault();
         return account?.Properties[nameof(Password)];
       }
     }
@@ -30,7 +32,7 @@ namespace QuickNAP.Droid
     {
       get
       {
-        var account = AccountStore.Create(Forms.Context).FindAccountsForService(App.AppName).FirstOrDefault();
+        var account = AccountStore.Create(CrossCurrentActivity.Current.Activity).FindAccountsForService(App.AppName).FirstOrDefault();
         return account?.Properties[nameof(IpAddress)];
       }
     }
@@ -39,7 +41,7 @@ namespace QuickNAP.Droid
     {
       get
       {
-        var account = AccountStore.Create(Forms.Context).FindAccountsForService(App.AppName).FirstOrDefault();
+        var account = AccountStore.Create(CrossCurrentActivity.Current.Activity).FindAccountsForService(App.AppName).FirstOrDefault();
         return account?.Properties[nameof(MacAddress)];
       }
     }
@@ -53,22 +55,22 @@ namespace QuickNAP.Droid
       account.Properties.Add(nameof(Password), password);
       account.Properties.Add(nameof(IpAddress), ipAddress);
       account.Properties.Add(nameof(MacAddress), macAddress);
-      AccountStore.Create(Forms.Context).Save(account, App.AppName);
+      AccountStore.Create(CrossCurrentActivity.Current.Activity).Save(account, App.AppName);
     }
 
     public void DeleteCredentials()
     {
-      var account = AccountStore.Create(Forms.Context).FindAccountsForService(App.AppName).FirstOrDefault();
+      var account = AccountStore.Create(CrossCurrentActivity.Current.Activity).FindAccountsForService(App.AppName).FirstOrDefault();
       if (account != null)
       {
-        AccountStore.Create(Forms.Context).Delete(account, App.AppName);
+        AccountStore.Create(CrossCurrentActivity.Current.Activity).Delete(account, App.AppName);
       }
     }
 
 
     public bool DoCredentialsExist()
     {
-      return AccountStore.Create(Forms.Context).FindAccountsForService(App.AppName).Any() ? true : false;
+      return AccountStore.Create(CrossCurrentActivity.Current.Activity).FindAccountsForService(App.AppName).Any() ? true : false;
     }
   }
 }

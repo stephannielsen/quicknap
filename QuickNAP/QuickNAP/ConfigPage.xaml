@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:QuickNAP"
+             xmlns:behav="clr-namespace:QuickNAP.Behaviors"
+             x:Class="QuickNAP.ConfigPage">
+  <ContentPage.BindingContext>
+    <l:ConfigViewModel />
+  </ContentPage.BindingContext>
+  <ContentPage.Title>Config</ContentPage.Title>
+  <ContentPage.Content>
+    <StackLayout VerticalOptions="StartAndExpand">
+      <Entry Placeholder="IP, e.g. 192.168.189.26"
+           Text="{Binding IpAddress}"
+           VerticalOptions="CenterAndExpand"
+           HorizontalOptions="FillAndExpand">
+        <Entry.Behaviors>
+          <behav:EventToCommandBehavior EventName="Completed" Command="{Binding SaveConfigCommand}" />
+        </Entry.Behaviors>
+      </Entry>
+      <Entry Placeholder="MAC, e.g. 245ebe0c5a50 / 24:5e:be:0c:5a:50"
+           Text="{Binding MacAddress}"
+           VerticalOptions="CenterAndExpand"
+           HorizontalOptions="FillAndExpand">
+        <Entry.Behaviors>
+          <behav:EventToCommandBehavior EventName="Completed" Command="{Binding SaveConfigCommand}" />
+        </Entry.Behaviors>
+      </Entry>
+      <Entry Placeholder="Username"
+           Text="{Binding Username}"
+           VerticalOptions="CenterAndExpand"
+           HorizontalOptions="FillAndExpand">
+        <Entry.Behaviors>
+          <behav:EventToCommandBehavior EventName="Completed" Command="{Binding SaveConfigCommand}" />
+        </Entry.Behaviors>
+      </Entry>
+      <Entry Placeholder="Password"
+           IsPassword="True"
+           Text="{Binding Password}"
+           VerticalOptions="CenterAndExpand"
+           HorizontalOptions="FillAndExpand">
+        <Entry.Behaviors>
+          <behav:EventToCommandBehavior EventName="Completed" Command="{Binding SaveConfigCommand}" />
+        </Entry.Behaviors>
+      </Entry>
+      <Button Text="Clear Config"
+          Command="{Binding ClearConfigCommand}"
+          IsEnabled="{Binding ConfigSaved}"
+          VerticalOptions="CenterAndExpand"
+          HorizontalOptions="FillAndExpand" />
+    </StackLayout>
+  </ContentPage.Content>
+</ContentPage>
