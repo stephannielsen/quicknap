@@ -244,3 +244,5 @@ ModelManifest.xml
 QnApi/QnApiConfig\.cs
 
 QnApi\.Test/config\.json
+
+*.csproj.bak
